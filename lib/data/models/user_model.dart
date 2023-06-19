@@ -4,36 +4,37 @@
 
 import 'dart:convert';
 
-UserModel userModelFromJson(String str) => UserModel.fromJson(json.decode(str));
+CategoryModel userModelFromJson(String str) =>
+    CategoryModel.fromJson(json.decode(str));
 
-String userModelToJson(UserModel data) => json.encode(data.toJson());
+String userModelToJson(CategoryModel data) => json.encode(data.toJson());
 
-class UserModel {
-    String id;
-    String fullName;
-    String email;
-    String password;
-    String phoneNumber;
-    String city;
-    String state;
-    String userModelId;
-    DateTime updatedOn;
-    DateTime createdOn;
+class CategoryModel {
+  String id;
+  String fullName;
+  String email;
+  String password;
+  String phoneNumber;
+  String city;
+  String state;
+  String userModelId;
+  DateTime updatedOn;
+  DateTime createdOn;
 
-    UserModel({
-        required this.id,
-        required this.fullName,
-        required this.email,
-        required this.password,
-        required this.phoneNumber,
-        required this.city,
-        required this.state,
-        required this.userModelId,
-        required this.updatedOn,
-        required this.createdOn,
-    });
+  CategoryModel({
+    required this.id,
+    required this.fullName,
+    required this.email,
+    required this.password,
+    required this.phoneNumber,
+    required this.city,
+    required this.state,
+    required this.userModelId,
+    required this.updatedOn,
+    required this.createdOn,
+  });
 
-    factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
+  factory CategoryModel.fromJson(Map<String, dynamic> json) => CategoryModel(
         id: json["_id"],
         fullName: json["fullName"],
         email: json["email"],
@@ -44,9 +45,9 @@ class UserModel {
         userModelId: json["id"],
         updatedOn: DateTime.parse(json["updatedOn"]),
         createdOn: DateTime.parse(json["createdOn"]),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "_id": id,
         "fullName": fullName,
         "email": email,
@@ -57,5 +58,5 @@ class UserModel {
         "id": userModelId,
         "updatedOn": updatedOn.toIso8601String(),
         "createdOn": createdOn.toIso8601String(),
-    };
+      };
 }

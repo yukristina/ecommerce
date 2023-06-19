@@ -7,7 +7,7 @@ class UserInitialState extends UserState {}
 class UserLoadingState extends UserState {}
 
 class UserLoggedInState extends UserState {
-  final UserModel userModel;
+  final CategoryModel userModel;
   UserLoggedInState(this.userModel);
 }
 
