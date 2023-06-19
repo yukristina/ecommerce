@@ -4,6 +4,7 @@ import 'package:ecommerce/core/routes.dart';
 import 'package:ecommerce/core/ui.dart';
 import 'package:ecommerce/logic/cubits/user_cubit.dart';
 import 'package:ecommerce/presentation/screens/auth/login_screen.dart';
+import 'package:ecommerce/presentation/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         onGenerateRoute: Routes.onGenerateRoute,
-        initialRoute: LoginScreen.routeName,
+        initialRoute: SplashScreen.routeName,
         title: 'Flutter Demo',
         theme: Themes.defaultTheme,
         home: const Text('Flutter Demo Home Page'),
