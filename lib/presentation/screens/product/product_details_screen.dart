@@ -1,10 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce/core/ui.dart';
 import 'package:ecommerce/data/models/product/product_model.dart';
+import 'package:ecommerce/logic/cubits/cart_cubit/cart_cubit.dart';
+import 'package:ecommerce/logic/cubits/cart_cubit/cart_state.dart';
 import 'package:ecommerce/logic/services/formatter.dart';
 import 'package:ecommerce/presentation/widgets/gap_widget.dart';
 import 'package:ecommerce/presentation/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
@@ -58,12 +61,26 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   const GapWidget(
                     size: 10,
                   ),
+                  BlocBuilder<CartCubit, CartState>(
+                    builder: (context, state) {
+                      bool isInCart = (BlocProvider.of<CartCubit>(context)
+                          .cartContains(widget.productModel));
+                      return PrimaryButton(
+                        onPressed: () {
+                          if (isInCart) {
+                            return;
+                          }
 
-                  PrimaryButton(
-                    onPressed: () {
-                      
+                          BlocProvider.of<CartCubit>(context)
+                              .addToCart(widget.productModel, 1);
+                        },
+                        color:
+                            isInCart ? AppColors.textLight : AppColors.accent,
+                        text:
+                            isInCart ? "Product added to cart" : 'Add to Cart',
+                      );
                     },
-                    text: 'Add to Cart'),
+                  ),
                   const GapWidget(
                     size: 10,
                   ),
@@ -72,7 +89,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     style:
                         TextStyles.body2.copyWith(fontWeight: FontWeight.bold),
                   ),
-                  Text(widget.productModel.description,style: TextStyles.body1,),
+                  Text(
+                    widget.productModel.description,
+                    style: TextStyles.body1,
+                  ),
                 ],
               ),
             ),

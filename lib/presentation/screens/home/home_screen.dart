@@ -1,3 +1,4 @@
+import 'package:ecommerce/presentation/screens/cart/cart_screen.dart';
 import 'package:ecommerce/presentation/screens/home/categories_screen.dart';
 import 'package:ecommerce/presentation/screens/home/profile_screen.dart';
 import 'package:ecommerce/presentation/screens/home/user_feed_screen.dart';
@@ -16,7 +17,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
 
-  List<Widget> screens = const[
+  List<Widget> screens = const [
     UserFeedScreen(),
     CategoryScreen(),
     ProfileScreen()
@@ -29,12 +30,14 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           title: const Text('Home'),
           actions: [
-            IconButton(onPressed: () {}, icon: const Icon(CupertinoIcons.cart)),
+            IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, CartScreen.routeName);
+                },
+                icon: const Icon(CupertinoIcons.cart)),
           ],
         ),
-    
         body: screens[currentIndex],
-        
         bottomNavigationBar: BottomNavigationBar(
             currentIndex: currentIndex,
             onTap: (index) {
@@ -46,7 +49,8 @@ class _HomeScreenState extends State<HomeScreen> {
               BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
               BottomNavigationBarItem(
                   icon: Icon(Icons.category), label: 'Categories'),
-              BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.person), label: 'Profile'),
             ]),
       ),
     );
