@@ -5,12 +5,11 @@ import 'package:ecommerce/core/ui.dart';
 import 'package:ecommerce/logic/cubits/category_cubit/category_cubit.dart';
 import 'package:ecommerce/logic/cubits/product_cubit/product_cubit.dart';
 import 'package:ecommerce/logic/cubits/user_cubit.dart';
-import 'package:ecommerce/presentation/screens/auth/login_screen.dart';
 import 'package:ecommerce/presentation/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() {
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
   runApp(const MyApp());

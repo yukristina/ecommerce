@@ -36,44 +36,56 @@ class _UserFeedScreenState extends State<UserFeedScreen> {
           itemCount: state.products.length,
           itemBuilder: (context, index) {
             final product = state.products[index];
-            return Row(
-              children: [
-                // image
-                CachedNetworkImage(
-                  width: MediaQuery.of(context).size.width / 3,
-                  imageUrl: product.images![0],
-                ),
-
-                // title, description, price
-                Flexible(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        product.title,
-                           maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyles.body1
-                            .copyWith(fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        product.description,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style:
-                            TextStyles.body2.copyWith(color: AppColors.textLight),
-                      ),
-                      const GapWidget(),
-                      Text(
-                        "\$${Formatter.formatPrice(product.price)}",
-                        style: TextStyles.heading3,
-                      ),
-                    ],
+            return Container(
+              margin: const EdgeInsets.all(8),
+              padding: const EdgeInsets.only(right: 8),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(4),
+                color: Colors.grey[100],
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // image
+                  CachedNetworkImage(
+                    width: MediaQuery.of(context).size.width / 3,
+                    imageUrl: product.images![0],
                   ),
-                ),
 
-                IconButton(onPressed: (){}, icon: const Icon(CupertinoIcons.cart))
-              ],
+                  // title, description, price
+                  Flexible(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          product.title,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyles.body1
+                              .copyWith(fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          product.description,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyles.body2
+                              .copyWith(color: AppColors.textLight),
+                        ),
+                        const GapWidget(),
+                        Text(
+                          "\$${Formatter.formatPrice(product.price)}",
+                          style: TextStyles.heading3,
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(CupertinoIcons.cart),
+                  ),
+                ],
+              ),
             );
           },
         );
