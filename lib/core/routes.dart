@@ -10,6 +10,7 @@ import 'package:ecommerce/presentation/screens/home/home_screen.dart';
 import 'package:ecommerce/presentation/screens/product/category_product_screen.dart';
 import 'package:ecommerce/presentation/screens/product/product_details_screen.dart';
 import 'package:ecommerce/presentation/screens/splash/splash_screen.dart';
+import 'package:ecommerce/presentation/screens/user/edit_profile_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -51,6 +52,9 @@ class Routes {
                       CategoryProductCubit(settings.arguments as CategoryModel),
                   child: const CategoryProductScreen(),
                 ));
+
+      case EditProfileScreen.routeName:
+        return CupertinoPageRoute(builder: (context) => const EditProfileScreen());
 
       default:
         return null;

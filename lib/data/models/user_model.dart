@@ -4,12 +4,11 @@
 
 import 'dart:convert';
 
-CategoryModel userModelFromJson(String str) =>
-    CategoryModel.fromJson(json.decode(str));
+UserModel userModelFromJson(String str) => UserModel.fromJson(json.decode(str));
 
-String userModelToJson(CategoryModel data) => json.encode(data.toJson());
+String userModelToJson(UserModel data) => json.encode(data.toJson());
 
-class CategoryModel {
+class UserModel {
   String id;
   String fullName;
   String email;
@@ -21,7 +20,7 @@ class CategoryModel {
   DateTime updatedOn;
   DateTime createdOn;
 
-  CategoryModel({
+  UserModel({
     required this.id,
     required this.fullName,
     required this.email,
@@ -34,7 +33,7 @@ class CategoryModel {
     required this.createdOn,
   });
 
-  factory CategoryModel.fromJson(Map<String, dynamic> json) => CategoryModel(
+  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         id: json["_id"],
         fullName: json["fullName"],
         email: json["email"],

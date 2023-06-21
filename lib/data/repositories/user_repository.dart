@@ -8,7 +8,7 @@ class UserRepository {
   final Api _api = Api();
 
   // create new users
-  Future<CategoryModel> createAccount({
+  Future<UserModel> createAccount({
     required String email,
     required String password,
   }) async {
@@ -24,14 +24,14 @@ class UserRepository {
         throw apiResponse.message.toString();
       }
 
-      return CategoryModel.fromJson(apiResponse.data);
+      return UserModel.fromJson(apiResponse.data);
     } catch (e) {
       rethrow;
     }
   }
 
   // signin the user
-  Future<CategoryModel> signIn({
+  Future<UserModel> signIn({
     required String email,
     required String password,
   }) async {
@@ -47,7 +47,27 @@ class UserRepository {
         throw apiResponse.message.toString();
       }
 
-      return CategoryModel.fromJson(apiResponse.data);
+      return UserModel.fromJson(apiResponse.data);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  // update user details
+  Future<UserModel> updateUser(UserModel userModel) async {
+    try {
+      Response response = await _api.sendRequest.put(
+        "//${userModel.id}",
+        data: jsonEncode(userModel.toJson()),
+      );
+
+      ApiResponse apiResponse = ApiResponse.fromResponse(response);
+
+      if (!apiResponse.success) {
+        throw apiResponse.message.toString();
+      }
+
+      return UserModel.fromJson(apiResponse.data);
     } catch (e) {
       rethrow;
     }

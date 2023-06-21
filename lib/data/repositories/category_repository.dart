@@ -6,7 +6,7 @@ class CategoryRepository {
   final Api _api = Api();
 
   // fetch all categories
-  Future<List<CategoryModel>> fetchAllCategories() async {
+  Future<List<UserModel>> fetchAllCategories() async {
     try {
       Response response = await _api.sendRequest.get("/category");
 
@@ -17,7 +17,7 @@ class CategoryRepository {
       }
 
       return (apiResponse.data as List<dynamic>)
-          .map((json) => CategoryModel.fromJson(json))
+          .map((json) => UserModel.fromJson(json))
           .toList();
     } catch (e) {
       rethrow;
