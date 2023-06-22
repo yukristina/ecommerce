@@ -7,6 +7,9 @@ import 'package:ecommerce/presentation/screens/auth/providers/signup_provider.da
 import 'package:ecommerce/presentation/screens/auth/signup_screen.dart';
 import 'package:ecommerce/presentation/screens/cart/cart_screen.dart';
 import 'package:ecommerce/presentation/screens/home/home_screen.dart';
+import 'package:ecommerce/presentation/screens/order/order_detail_screen.dart';
+import 'package:ecommerce/presentation/screens/order/order_placed_screen.dart';
+import 'package:ecommerce/presentation/screens/order/providers/order_detail_provider.dart';
 import 'package:ecommerce/presentation/screens/product/category_product_screen.dart';
 import 'package:ecommerce/presentation/screens/product/product_details_screen.dart';
 import 'package:ecommerce/presentation/screens/splash/splash_screen.dart';
@@ -55,6 +58,14 @@ class Routes {
 
       case EditProfileScreen.routeName:
         return CupertinoPageRoute(builder: (context) => const EditProfileScreen());
+
+      case OrderDetailScreen.routeName:
+        return CupertinoPageRoute(builder: (context) => ChangeNotifierProvider(
+          create: (context) => OrderDetailProvider(),
+          child: const OrderDetailScreen()));
+        
+            case OrderPlacedScreen.routeName:
+        return CupertinoPageRoute(builder: (context) => const OrderPlacedScreen());
 
       default:
         return null;

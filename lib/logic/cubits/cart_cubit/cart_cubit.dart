@@ -56,7 +56,6 @@ class CartCubit extends Cubit<CartState> {
         final items =
             await _cartRepository.addToCart(newItem, userState.userModel.id);
         sortAndLoad(items);
-
       } else {
         throw "An error occured while adding the item";
       }
@@ -74,8 +73,7 @@ class CartCubit extends Cubit<CartState> {
 
         final items = await _cartRepository.removeFromCart(
             product.id, userState.userModel.id);
-              sortAndLoad(items);
-
+        sortAndLoad(items);
       } else {
         throw "An error occured while removing the item";
       }

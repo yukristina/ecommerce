@@ -4,6 +4,7 @@ import 'package:ecommerce/core/routes.dart';
 import 'package:ecommerce/core/ui.dart';
 import 'package:ecommerce/logic/cubits/cart_cubit/cart_cubit.dart';
 import 'package:ecommerce/logic/cubits/category_cubit/category_cubit.dart';
+import 'package:ecommerce/logic/cubits/order_cubit/order_cubit.dart';
 import 'package:ecommerce/logic/cubits/product_cubit/product_cubit.dart';
 import 'package:ecommerce/logic/cubits/user_cubit.dart';
 import 'package:ecommerce/presentation/screens/splash/splash_screen.dart';
@@ -28,6 +29,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => CategoryCubit()),
         BlocProvider(create: (context) => ProductCubit()),
         BlocProvider(create: (context) => CartCubit(
+          BlocProvider.of<UserCubit>(context)
+        )),
+        BlocProvider(create: (context) => OrderCubit(
           BlocProvider.of<UserCubit>(context)
         )),
       ],

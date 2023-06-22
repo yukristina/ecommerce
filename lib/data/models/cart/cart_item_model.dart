@@ -24,8 +24,8 @@ class CartItemModel {
         id: json["_id"],
       );
 
-  Map<String, dynamic> toJson() => {
-        "product": product!.id,
+  Map<String, dynamic> toJson({bool objectMode = false}) => {
+        "product": (objectMode == false) ? product!.id : product!.toJson(),
         "quantity": quantity,
         "_id": id,
       };
