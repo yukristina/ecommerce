@@ -2,6 +2,7 @@ import 'package:ecommerce/core/ui.dart';
 import 'package:ecommerce/data/models/user_model.dart';
 import 'package:ecommerce/logic/cubits/user_cubit.dart';
 import 'package:ecommerce/logic/cubits/user_state.dart';
+import 'package:ecommerce/presentation/screens/order/my_order_screen.dart';
 import 'package:ecommerce/presentation/screens/user/edit_profile_screen.dart';
 import 'package:ecommerce/presentation/widgets/link_button.dart';
 import 'package:flutter/cupertino.dart';
@@ -65,7 +66,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         const Divider(),
         ListTile(
-          onTap: () {},
+          onTap: () {
+            Navigator.pushNamed(context, MyOrderScreen.routeName);
+          },
           contentPadding: EdgeInsets.zero,
           leading: const Icon(CupertinoIcons.cube_box_fill),
           title: Text(

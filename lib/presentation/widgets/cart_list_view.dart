@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce/data/models/cart/cart_item_model.dart';
 import 'package:ecommerce/logic/cubits/cart_cubit/cart_cubit.dart';
@@ -22,12 +24,14 @@ class CartListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: shrinkWrap,
-      physics: (noScroll) ? const NeverScrollableScrollPhysics(): null,
+      physics: (noScroll) ? const NeverScrollableScrollPhysics() : null,
       itemCount: items.length,
       itemBuilder: (context, index) {
         final item = items[index];
         return ListTile(
-          leading: CachedNetworkImage(imageUrl: item.product!.images![0]),
+          leading: CachedNetworkImage(
+            width: 50,
+            imageUrl: item.product!.images![0]),
           title: Text(item.product!.title),
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,6 +54,7 @@ class CartListView extends StatelessWidget {
             initVal: item.quantity,
             showMessageLimit: false,
             onQtyChanged: (value) {
+              if (value == item.quantity) return;
               BlocProvider.of<CartCubit>(context)
                   .addToCart(item.product!, value as int);
             },

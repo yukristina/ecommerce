@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:ecommerce/data/models/cart/cart_item_model.dart';
 import 'package:ecommerce/data/models/order/order_model.dart';
 import 'package:ecommerce/data/repositories/order_repository.dart';
+import 'package:ecommerce/logic/cubits/cart_cubit/cart_cubit.dart';
 import 'package:ecommerce/logic/cubits/order_cubit/order_state.dart';
 import 'package:ecommerce/logic/cubits/user_cubit.dart';
 import 'package:ecommerce/logic/cubits/user_state.dart';
@@ -10,8 +11,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OrderCubit extends Cubit<OrderState> {
   final UserCubit _userCubit;
+  final CartCubit _cartCubit;
   StreamSubscription? _userSubscription;
-  OrderCubit(this._userCubit) : super(OrderInitialState()) {
+  OrderCubit(this._userCubit, this._cartCubit) : super(OrderInitialState()) {
     // initial value
     _handleUserState(_userCubit.state);
 
@@ -58,8 +60,11 @@ class OrderCubit extends Cubit<OrderState> {
       );
       final order = await _orderRepository.createOrders(newOrder);
 
-      List<OrderModel> orders = [...state.orders, order];
+      List<OrderModel> orders = [order,...state.orders];
       emit(OrderLoadedState(orders));
+
+      // clear the cart
+      _cartCubit.clearCart();
       return true;
     } catch (e) {
       emit(OrderErrorState(e.toString(), state.orders));
